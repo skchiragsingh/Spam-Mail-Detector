@@ -72,10 +72,7 @@ def load_resources():
 
     model = MultinomialNB()
 
-    model.fit(
-        X,
-        df["label"]
-    )
+    model.fit(X, df["label"])
 
     return model, tfidf, stop_words
 
@@ -130,61 +127,30 @@ st.markdown("""
 
 .block-container {
     max-width: 850px;
-    padding-top: 4rem;
+    padding-top: 3rem;
     padding-bottom: 3rem;
 }
 
-.hero {
+.main-title {
     text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-.logo {
-    width: 75px;
-    height: 75px;
-    margin: auto;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    background:
-        linear-gradient(
-            135deg,
-            #6366f1,
-            #8b5cf6
-        );
-    border-radius: 22px;
-    box-shadow:
-        0 15px 40px
-        rgba(99, 102, 241, 0.35);
-}
-
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
     color: #f8fafc;
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 0;
 }
 
-.hero p {
+.subtitle {
+    text-align: center;
     color: #94a3b8;
     font-size: 1.1rem;
-}
-
-.input-label {
-    color: #f8fafc;
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-div[data-testid="stTextArea"] {
-    margin-top: 0px;
+    margin-bottom: 3rem;
 }
 
 div[data-testid="stTextArea"] label {
-    display: none !important;
+    color: #f8fafc !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    margin-bottom: 10px !important;
 }
 
 .stTextArea textarea {
@@ -227,7 +193,6 @@ div[data-testid="stTextArea"] label {
     color: white;
     font-size: 17px;
     font-weight: 600;
-    transition: all 0.2s ease;
     margin-top: 10px;
 }
 
@@ -245,11 +210,8 @@ div[data-testid="stTextArea"] label {
 }
 
 .result-spam {
-    background:
-        rgba(239, 68, 68, 0.12);
-    border:
-        1px solid
-        rgba(239, 68, 68, 0.4);
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
     padding: 22px;
     border-radius: 16px;
     text-align: center;
@@ -257,15 +219,11 @@ div[data-testid="stTextArea"] label {
     font-size: 20px;
     font-weight: 700;
     margin-top: 25px;
-    animation: fadeIn 0.4s ease;
 }
 
 .result-ham {
-    background:
-        rgba(16, 185, 129, 0.12);
-    border:
-        1px solid
-        rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
     padding: 22px;
     border-radius: 16px;
     text-align: center;
@@ -273,55 +231,32 @@ div[data-testid="stTextArea"] label {
     font-size: 20px;
     font-weight: 700;
     margin-top: 25px;
-    animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.footer {
+.footer-text {
     text-align: center;
-    margin-top: 3rem;
     color: #64748b;
     font-size: 14px;
+    margin-top: 3rem;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 
-st.markdown("""
-<div class="hero">
-
-    <div class="logo">📩</div>
-
-    <h1>MailScan</h1>
-
-    <p>
-        AI-powered message analysis to detect potential spam instantly.
-    </p>
-
-</div>
-""", unsafe_allow_html=True)
-
+st.markdown(
+    '<div class="main-title">📩 MailScan</div>',
+    unsafe_allow_html=True
+)
 
 st.markdown(
-    '<div class="input-label">Enter your message</div>',
+    '<div class="subtitle">AI-powered message analysis to detect potential spam instantly.</div>',
     unsafe_allow_html=True
 )
 
 
 message = st.text_area(
-    label="message_input",
+    "Enter your message",
     height=170,
     placeholder="Paste or type a message here..."
 )
@@ -348,9 +283,7 @@ if check:
 
             time.sleep(1.5)
 
-            cleaned_message = preprocess_text(
-                message
-            )
+            cleaned_message = preprocess_text(message)
 
             message_tfidf = tfidf.transform(
                 [cleaned_message]
@@ -364,18 +297,11 @@ if check:
 
             st.markdown("""
             <div class="result-spam">
-
                 🚨 SPAM DETECTED
-
                 <br><br>
-
-                <span style="
-                    font-size:14px;
-                    font-weight:400;
-                ">
+                <span style="font-size:14px; font-weight:400;">
                     This message appears to contain spam-like content.
                 </span>
-
             </div>
             """, unsafe_allow_html=True)
 
@@ -383,28 +309,16 @@ if check:
 
             st.markdown("""
             <div class="result-ham">
-
                 ✅ MESSAGE LOOKS SAFE
-
                 <br><br>
-
-                <span style="
-                    font-size:14px;
-                    font-weight:400;
-                ">
+                <span style="font-size:14px; font-weight:400;">
                     This message is classified as legitimate.
                 </span>
-
             </div>
             """, unsafe_allow_html=True)
 
 
-st.markdown("""
-<div class="footer">
-
-    Powered by Machine Learning
-    • TF-IDF
-    • Naive Bayes
-
-</div>
-""", unsafe_allow_html=True)
+st.markdown(
+    '<div class="footer-text">Powered by Machine Learning • TF-IDF • Naive Bayes</div>',
+    unsafe_allow_html=True
+)
