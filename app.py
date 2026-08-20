@@ -62,9 +62,7 @@ def load_resources():
 
         return " ".join(tokens)
 
-    df["cleaned_message"] = df["message"].apply(
-        clean_text
-    )
+    df["cleaned_message"] = df["message"].apply(clean_text)
 
     tfidf = TfidfVectorizer()
 
@@ -144,25 +142,19 @@ st.markdown("""
 .logo {
     width: 75px;
     height: 75px;
-
     margin: auto;
     margin-bottom: 1rem;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 36px;
-
     background:
         linear-gradient(
             135deg,
             #6366f1,
             #8b5cf6
         );
-
     border-radius: 22px;
-
     box-shadow:
         0 15px 40px
         rgba(99, 102, 241, 0.35);
@@ -180,177 +172,127 @@ st.markdown("""
     font-size: 1.1rem;
 }
 
-.card {
-    background: rgba(30, 41, 59, 0.75);
+.input-label {
+    color: #f8fafc;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 
-    border:
-        1px solid
-        rgba(148, 163, 184, 0.15);
+div[data-testid="stTextArea"] {
+    margin-top: 0px;
+}
 
-    border-radius: 20px;
-    padding: 28px;
-
-    backdrop-filter: blur(15px);
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, 0.25);
+div[data-testid="stTextArea"] label {
+    display: none !important;
 }
 
 .stTextArea textarea {
+    background-color: #111827 !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+    border-radius: 14px !important;
+    font-size: 16px !important;
+    padding: 16px !important;
+    min-height: 170px !important;
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.18);
+}
 
-    background-color:
-        #0f172a !important;
-
-    color:
-        #f8fafc !important;
-
-    border:
-        1px solid
-        #334155 !important;
-
-    border-radius:
-        14px !important;
-
-    font-size:
-        16px !important;
-
-    padding:
-        15px !important;
+.stTextArea textarea::placeholder {
+    color: #64748b !important;
+    opacity: 1;
 }
 
 .stTextArea textarea:focus {
-
-    border:
-        1px solid
-        #6366f1 !important;
-
+    border: 1px solid #818cf8 !important;
     box-shadow:
-        0 0 0 2px
-        rgba(99, 102, 241, 0.2)
+        0 0 0 3px
+        rgba(99, 102, 241, 0.18)
         !important;
 }
 
 .stButton > button {
-
     width: 100%;
-    height: 52px;
-
+    height: 54px;
     border: none;
-
-    border-radius:
-        14px;
-
+    border-radius: 14px;
     background:
         linear-gradient(
             135deg,
             #6366f1,
             #8b5cf6
         );
-
     color: white;
-
-    font-size:
-        17px;
-
-    font-weight:
-        600;
-
-    transition:
-        all 0.2s ease;
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-top: 10px;
 }
 
 .stButton > button:hover {
-
-    transform:
-        translateY(-2px);
-
+    transform: translateY(-2px);
     background:
         linear-gradient(
             135deg,
             #7c3aed,
             #6366f1
         );
-
     box-shadow:
         0 12px 30px
         rgba(99, 102, 241, 0.35);
 }
 
 .result-spam {
-
     background:
         rgba(239, 68, 68, 0.12);
-
     border:
         1px solid
-        rgba(239, 68, 68, 0.35);
-
+        rgba(239, 68, 68, 0.4);
     padding: 22px;
-
-    border-radius:
-        16px;
-
-    text-align:
-        center;
-
-    color:
-        #fca5a5;
-
-    font-size:
-        20px;
-
-    font-weight:
-        700;
-
-    margin-top:
-        20px;
+    border-radius: 16px;
+    text-align: center;
+    color: #fca5a5;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 25px;
+    animation: fadeIn 0.4s ease;
 }
 
 .result-ham {
-
     background:
         rgba(16, 185, 129, 0.12);
-
     border:
         1px solid
-        rgba(16, 185, 129, 0.35);
+        rgba(16, 185, 129, 0.4);
+    padding: 22px;
+    border-radius: 16px;
+    text-align: center;
+    color: #6ee7b7;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 25px;
+    animation: fadeIn 0.4s ease;
+}
 
-    padding:
-        22px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 
-    border-radius:
-        16px;
-
-    text-align:
-        center;
-
-    color:
-        #6ee7b7;
-
-    font-size:
-        20px;
-
-    font-weight:
-        700;
-
-    margin-top:
-        20px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .footer {
-
-    text-align:
-        center;
-
-    margin-top:
-        3rem;
-
-    color:
-        #64748b;
-
-    font-size:
-        14px;
+    text-align: center;
+    margin-top: 3rem;
+    color: #64748b;
+    font-size: 14px;
 }
 
 </style>
@@ -360,26 +302,26 @@ st.markdown("""
 st.markdown("""
 <div class="hero">
 
-<div class="logo">📩</div>
+    <div class="logo">📩</div>
 
-<h1>MailScan</h1>
+    <h1>MailScan</h1>
 
-<p>
-AI-powered message analysis to detect potential spam instantly.
-</p>
+    <p>
+        AI-powered message analysis to detect potential spam instantly.
+    </p>
 
 </div>
 """, unsafe_allow_html=True)
 
 
 st.markdown(
-    '<div class="card">',
+    '<div class="input-label">Enter your message</div>',
     unsafe_allow_html=True
 )
 
 
 message = st.text_area(
-    "Enter your message",
+    label="message_input",
     height=170,
     placeholder="Paste or type a message here..."
 )
@@ -387,12 +329,6 @@ message = st.text_area(
 
 check = st.button(
     "🔍 Analyze Message"
-)
-
-
-st.markdown(
-    "</div>",
-    unsafe_allow_html=True
 )
 
 
@@ -431,16 +367,13 @@ if check:
 
                 🚨 SPAM DETECTED
 
-                <br>
+                <br><br>
 
                 <span style="
                     font-size:14px;
                     font-weight:400;
                 ">
-
-                This message appears to contain
-                spam-like content.
-
+                    This message appears to contain spam-like content.
                 </span>
 
             </div>
@@ -453,16 +386,13 @@ if check:
 
                 ✅ MESSAGE LOOKS SAFE
 
-                <br>
+                <br><br>
 
                 <span style="
                     font-size:14px;
                     font-weight:400;
                 ">
-
-                This message is classified
-                as legitimate.
-
+                    This message is classified as legitimate.
                 </span>
 
             </div>
@@ -472,9 +402,9 @@ if check:
 st.markdown("""
 <div class="footer">
 
-Powered by Machine Learning
-• TF-IDF
-• Naive Bayes
+    Powered by Machine Learning
+    • TF-IDF
+    • Naive Bayes
 
 </div>
 """, unsafe_allow_html=True)
