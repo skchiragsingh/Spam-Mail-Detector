@@ -245,7 +245,7 @@ div[data-testid="stTextArea"] label {
 
 
 st.markdown(
-    '<div class="main-title">📩 MailScan</div>',
+    '<div class="main-title">MailScan</div>',
     unsafe_allow_html=True
 )
 
